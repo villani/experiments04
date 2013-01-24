@@ -1,0 +1,29 @@
+Thu Jan 24 17:35:12 BRST 2013: LOG INITIALIZED
+Thu Jan 24 17:35:12 BRST 2013: Iniciando Experiments04-Exe20131241735:
+Thu Jan 24 17:35:12 BRST 2013: Obtendo as entradas do sistema a partir de conf.ini.
+Thu Jan 24 17:35:12 BRST 2013: Entradas obtidas.
+Thu Jan 24 17:35:12 BRST 2013: Conferindo entradas:
+Thu Jan 24 17:35:12 BRST 2013:  - brknn: false
+Thu Jan 24 17:35:12 BRST 2013:  - caminho: /IRMA/2009/ImageCLEFmed2009_train.02
+Thu Jan 24 17:35:12 BRST 2013:  - chain: false
+Thu Jan 24 17:35:12 BRST 2013:  - clus: false
+Thu Jan 24 17:35:12 BRST 2013:  - ehd: false
+Thu Jan 24 17:35:12 BRST 2013:  - gabor: false
+Thu Jan 24 17:35:12 BRST 2013:  - irma: 1345115140_export_eng.txt
+Thu Jan 24 17:35:12 BRST 2013:  - lbp: false
+Thu Jan 24 17:35:12 BRST 2013:  - mlknn: false
+Thu Jan 24 17:35:12 BRST 2013:  - ni: 100
+Thu Jan 24 17:35:12 BRST 2013:  - ns: 10
+Thu Jan 24 17:35:12 BRST 2013:  - rotulos: /IRMA/2009/ImageCLEFmed2009_train_codes.02.csv
+Thu Jan 24 17:35:12 BRST 2013:  - sift: false
+Thu Jan 24 17:35:13 BRST 2013:  - zernike: false
+Thu Jan 24 17:35:13 BRST 2013: Iniciando fase 1 - Preparacao dos dados...
+Thu Jan 24 17:35:13 BRST 2013:  - Recebendo os parametros de entrada.
+Thu Jan 24 17:35:13 BRST 2013:  - Obtendo o conjunto principal de imagens.
+Thu Jan 24 17:35:13 BRST 2013:  - Removendo imagens do formato TIFF do conjunto.
+Thu Jan 24 17:35:13 BRST 2013:  - Constituido conjunto principal com 12677 imagens.
+Thu Jan 24 17:35:13 BRST 2013: Iniciando fase 2 - Construcao das bases ARFF...
+Thu Jan 24 17:35:13 BRST 2013: Iniciando fase 3 - Avaliação dos classificadores...
+Thu Jan 24 17:35:13 BRST 2013: Finalizando experimento.
+Thu Jan 24 17:35:13 BRST 2013: LOG FINALIZED
+
