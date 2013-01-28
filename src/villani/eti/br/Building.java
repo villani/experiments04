@@ -18,6 +18,7 @@ import mpi.cbg.fly.FloatArray2D;
 import mpi.cbg.fly.FloatArray2DSIFT;
 import mpi.cbg.fly.ImageArrayConverter;
 import mulan.data.InvalidDataFormatException;
+import net.semanticmetadata.lire.imageanalysis.Gabor;
 import net.semanticmetadata.lire.imageanalysis.mpeg7.EdgeHistogramImplementation;
 import weka.clusterers.SimpleKMeans;
 import weka.core.Attribute;
@@ -310,7 +311,68 @@ public class Building {
 		}
 		
 		if (hasGabor){
-			
+			for (int i = 0; i < ns; i++) {
+				log.write(" - Construindo a base ARFF Gabor para o subconjunto " + i);
+				
+				String dataset = id + "-Gabor-Sub" + i;
+				RelationBuilder instanciasGabor = null;
+				try{
+					instanciasGabor = new RelationBuilder(dataset, id);
+					for (int j = 0; j < 60; j++) instanciasGabor.defineAttribute("gabor" + j, "numeric");
+					log.write("- Salvando a lista de atributos e incluindo a lista de rotulos a partir do xml");
+					instanciasGabor.saveAttributes();
+				} catch(IOException ioe){
+					log.write(" - Falha ao criar ou salvar a lista de atributos e rótulos: " + ioe.getMessage());
+					System.exit(0);
+				} catch(Exception e){
+					log.write(" - Falha ao define um atributo: " + e.getMessage());
+					System.exit(0);
+				}
+				
+				log.write(" - Obtendo caracteristicas de Gabor para cada imagem");
+				ArrayList<File> imagens = new ArrayList<File>(ni);
+				File subconjunto = new File(id + "-Sub" + i + ".lst");
+				leitor = null;
+				try {
+					leitor = new Scanner(subconjunto);
+				} catch (FileNotFoundException fnfe) {
+					log.write(" - Falha ao ler o arquivo " + subconjunto.getName() + " ao obter Gabor: " + fnfe.getMessage());
+					System.exit(0);
+				}
+				
+				while (leitor.hasNextLine()) imagens.add(new File(leitor.nextLine()));
+				for (File imagem : imagens) {
+					
+					Gabor extrator = new Gabor();
+					double[] histGabor = null;
+					try {
+						histGabor = extrator.getFeature(ImageIO.read(imagem));
+					} catch (IOException ioe) {
+						log.write(" - Falha ao obter Gabor para a imagem " + imagem.getName() + ": " + ioe.getMessage());
+					}
+					String amostra = "";
+					for (double g : histGabor) amostra += g + ",";
+					
+					String nomeImg = imagem.getName().split("\\.")[0];
+					amostra += conversor.toBinary(relacao.get(nomeImg));
+					
+					try {
+						instanciasGabor.insertData(amostra);
+					} catch (Exception ex) {
+						log.write(" - Falha ao inserir amostra" + amostra + ": " + ex.getMessage());
+						System.exit(0);
+					}
+				}
+
+				try {
+					instanciasGabor.saveRelation();
+				} catch (InvalidDataFormatException idfe){
+					log.write(" - Falha no formato ao salvar relação: " + idfe.getMessage());
+				} catch (IOException ioe) {
+					log.write(" - Falha ao salvar relação: " + ioe.getMessage());
+				}
+				log.write(" - Novo conjunto de amostras salvo em: " + dataset + ".arff");
+			}
 		}
 		
 		if (hasZernike){
