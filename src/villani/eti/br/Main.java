@@ -41,10 +41,10 @@ public class Main {
 		Preparing.run(id, log,entradas);
 		
 		log.write("Iniciando fase 2 - Construcao das bases ARFF...");
-		Building.run(entradas);
+		Building.run(id, log, entradas);
 		
 		log.write("Iniciando fase 3 - Avaliação dos classificadores...");
-		Evaluating.run(entradas);
+		Evaluating.run(id, log, entradas);
 		
 		log.write("Finalizando experimento.");
 		
